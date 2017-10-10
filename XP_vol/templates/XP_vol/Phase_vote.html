@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+    Vote
+{% endblock %}
+
+{% block content %}
+        <p>
+            Rappel:<br>
+            Le choix 1 consiste à envoyer un montant de 450 ECU à tou-te-s les joueurs/joueuses dans la salle <br>
+            Le choix 2 consiste à envoyer 450 ECU à celles et ceux qui ont décidé
+            de ne pas prendre une partie du revenu d’un autre joueur (ou qui n’ont pas été détectés) et
+            envoyer 250 ECU à celles et ceux qui ont été détectés
+        </p>
+
+        {% formfield player.vote_sanction %}
+
+{% next_button %}
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Tâches
+{% endblock %}
+
+{% block content %}
+    <strong>Pour pouvoir passer à l'étape suivante vous devez placer 30 sliders ci-dessous sur la position 50</strong><br>
+    <div>Nombre de tâches accomplies: <span id="id_tasks_done">0</span></div>
+
+    <table>
+        <tr>
+            <td><div id="s0-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s1-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s2-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s3-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s4-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s5-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s6-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s7-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s8-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s9-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s10-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s11-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s12-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s13-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s14-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s15-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s16-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s17-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s18-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s19-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s20-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s21-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s22-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s23-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s24-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s25-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s26-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+        <tr>
+            <td><div id="s27-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s28-value" style="width: 250px; margin: 20px"></div></td>
+            <td><div id="s29-value" style="width: 250px; margin: 20px"></div></td>
+        </tr>
+    </table>
+
+    <input type="hidden" name="numberOfTasksDone" id="id_numberOfTasksDone"/>
+    <input id ="nextButton" class="btn btn-primary btn-large btn-primary next-button" type="submit" style="visibility:hidden;" value="Next" />
+
+{% endblock %}
+
+
+
+{% block styles %}
+    <!-- define a style -->
+    <!-- or reference a static file -->
+    <link href="{% static "sliders/freshslider.min.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="{% static "sliders/freshslider.min.js" %}"></script>
+    <script>
+        var tasks_tab = [];
+        // Each time a slider is moved, update the number of tasks done
+        function refreshTaskNumber() {
+            var counter = 0;
+            for (i = 0; i < tasks_tab.length; i++){
+                if (tasks_tab[i] == 50){
+                    counter += 1;
+                }
+            }
+            document.getElementById("id_numberOfTasksDone").value = counter;
+            document.getElementById("id_tasks_done").innerHTML = counter;
+        }
+        var myVar = setInterval(function(){ myTask() }, 1000);
+
+        // count the number of slider done and move to the next page only if a certain number of sliders are done
+        function myTask(){
+        TaskDone = document.getElementById("id_numberOfTasksDone").value
+        if (TaskDone == 1){
+                clearInterval(myVar);
+                alert("Vous êtes un joueur de type: " + {{ player.type_joueur|json }});
+                document.getElementById("nextButton").click();
+            }
+        }
+   //    Faire un message popup pour les joueurs avec leurs type (A/B/C)
+   //    function PopUpMessage() {
+   //         var message = document.getElementById("type_joueur").value;
+   //         alert(message)
+   //         alert("Vous êtes un joueur de type C");
+   //         }
+        // les 30 sliders
+        $("#s0-value").freshslider( { step: 1, value:0 , onchange:function(value){tasks_tab[0] = value; refreshTaskNumber();} } );
+        $("#s1-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[1] = value; refreshTaskNumber(value);} } );
+        $("#s2-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[2] = value; refreshTaskNumber(value);} } );
+        $("#s3-value").freshslider( { step: 1, value:20 , onchange:function(value){tasks_tab[3] = value; refreshTaskNumber(value);} } );
+        $("#s4-value").freshslider( { step: 1, value:30 , onchange:function(value){tasks_tab[4] = value; refreshTaskNumber(value);} } );
+        $("#s5-value").freshslider( { step: 1, value:40 , onchange:function(value){tasks_tab[5] = value; refreshTaskNumber(value);} } );
+        $("#s6-value").freshslider( { step: 1, value:90 , onchange:function(value){tasks_tab[6] = value; refreshTaskNumber();} } );
+        $("#s7-value").freshslider( { step: 1, value:70 , onchange:function(value){tasks_tab[7] = value; refreshTaskNumber(value);} } );
+        $("#s8-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[8] = value; refreshTaskNumber(value);} } );
+        $("#s9-value").freshslider( { step: 1, value:40 , onchange:function(value){tasks_tab[9] = value; refreshTaskNumber(value);} } );
+        $("#s10-value").freshslider( { step: 1, value:80 , onchange:function(value){tasks_tab[10] = value; refreshTaskNumber(value);} } );
+        $("#s11-value").freshslider( { step: 1, value:80 , onchange:function(value){tasks_tab[11] = value; refreshTaskNumber(value);} } );
+        $("#s12-value").freshslider( { step: 1, value:0 , onchange:function(value){tasks_tab[12] = value; refreshTaskNumber();} } );
+        $("#s13-value").freshslider( { step: 1, value:100 , onchange:function(value){tasks_tab[13] = value; refreshTaskNumber(value);} } );
+        $("#s14-value").freshslider( { step: 1, value:30 , onchange:function(value){tasks_tab[14] = value; refreshTaskNumber(value);} } );
+        $("#s15-value").freshslider( { step: 1, value:20 , onchange:function(value){tasks_tab[15] = value; refreshTaskNumber(value);} } );
+        $("#s16-value").freshslider( { step: 1, value:60 , onchange:function(value){tasks_tab[16] = value; refreshTaskNumber(value);} } );
+        $("#s17-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[17] = value; refreshTaskNumber(value);} } );
+        $("#s18-value").freshslider( { step: 1, value:0 , onchange:function(value){tasks_tab[18] = value; refreshTaskNumber();} } );
+        $("#s19-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[19] = value; refreshTaskNumber(value);} } );
+        $("#s20-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[20] = value; refreshTaskNumber(value);} } );
+        $("#s21-value").freshslider( { step: 1, value:20 , onchange:function(value){tasks_tab[21] = value; refreshTaskNumber(value);} } );
+        $("#s22-value").freshslider( { step: 1, value:30 , onchange:function(value){tasks_tab[22] = value; refreshTaskNumber(value);} } );
+        $("#s23-value").freshslider( { step: 1, value:40 , onchange:function(value){tasks_tab[23] = value; refreshTaskNumber(value);} } );
+        $("#s24-value").freshslider( { step: 1, value:90 , onchange:function(value){tasks_tab[24] = value; refreshTaskNumber();} } );
+        $("#s25-value").freshslider( { step: 1, value:70 , onchange:function(value){tasks_tab[25] = value; refreshTaskNumber(value);} } );
+        $("#s26-value").freshslider( { step: 1, value:10 , onchange:function(value){tasks_tab[26] = value; refreshTaskNumber(value);} } );
+        $("#s27-value").freshslider( { step: 1, value:40 , onchange:function(value){tasks_tab[27] = value; refreshTaskNumber(value);} } );
+        $("#s28-value").freshslider( { step: 1, value:80 , onchange:function(value){tasks_tab[28] = value; refreshTaskNumber(value);} } );
+        $("#s29-value").freshslider( { step: 1, value:80 , onchange:function(value){tasks_tab[29] = value; refreshTaskNumber(value);} } );
+                // Start the timeout
+        //window.onload=setInterval(function () {document.getElementById("nextButton").click();}, 120*1000);
+    </script>
+{% endblock %}
+

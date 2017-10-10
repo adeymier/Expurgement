@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Resultats vote
+{% endblock %}
+
+{% block content %}
+<p>
+
+
+    {% if choix_1 %}
+
+    Les joueurs de type C ont choisit l'option 1 qui consiste à
+    envoyer un montant de 450 ECU à tou-te-s les joueurs/joueuses dans la salle
+
+    {% else %}
+
+    Les joueurs de type C ont choisit l'option 2 qui consiste à
+    envoyer 450 ECU à celles et ceux qui ont décidé
+    de ne pas prendre une partie du revenu d’un autre joueur (ou qui n’ont pas été détectés) et
+    envoyer 250 ECU à celles et ceux qui ont été détectés
+
+    {% endif %}
+
+</p>
+
+ {% next_button %}
+
+
+{% endblock %}

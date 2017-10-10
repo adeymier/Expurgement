@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Décider de voler ou pas
+{% endblock %}
+
+{% block content %}
+    <p>
+        {% if voleur_type_A %}
+            Vous êtes type A
+        {% else %}
+            Vous êtes type B
+        {% endif %}
+        <br>
+        Vous devez décider de voler ou pas une partie du revenu de la personne avec laquelle vous êtes apparié
+        <br>
+        Vous pouvez lui voler 450 ECU
+            {% formfield player.voler_35 %}
+    </p>
+    <p>
+        Vous devez décider de voler ou pas une partie du revenu de la personne avec laquelle vous êtes apparié
+        <br>
+        Vous pouvez lui voler 125 ECU
+            {% formfield player.voler_10 %}
+
+    </p>
+
+ {% next_button %}
+
+{% endblock %}

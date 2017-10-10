@@ -1,0 +1,16 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Récapitulatif
+{% endblock %}
+
+{% block content %}
+
+        Bravo! Vous avez aligné les {{player.numberOfTasksDone}} sliders! <br>
+        Votre compte est crédité de 1450 ECU <br>
+        Vous pouvez continuer l'expérience.
+        <p align="center"><img src="{% static "sliders/bravo.gif" %}"/></p>
+     {% next_button %}
+
+{% endblock %}

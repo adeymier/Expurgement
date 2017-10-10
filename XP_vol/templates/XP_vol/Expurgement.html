@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Effacer sa dette
+{% endblock %}
+
+{% block content %}
+    <p>
+        Vous avez décider de voler la personne avec laquelle vous êtes apparié
+        <br>
+        Si vous êtes détecté, vous avez le choix entre effacer votre punition ou la garder
+
+        {% formfield player.expurgement %}
+
+    </p>
+
+ {% next_button %}
+
+{% endblock %}

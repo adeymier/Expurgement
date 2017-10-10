@@ -1,0 +1,55 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Rappel Décisions
+{% endblock %}
+
+{% block content %}
+        {% if voleur %}
+            {% if voleur_type_A %}
+                Vous êtiez un voleur de type A<br>
+            {% else %}
+                Vous êtiez un voleur de type B<br>
+            {% endif %}
+
+                {% if vol_1 %}
+                Votre décision a été de voler en première étape<br>
+
+                    {% if detect__1 %}
+                        Votre vol a été détecté<br>
+                        Vous aviez le choix entre effacer et ne pas effacer votre dette <br>
+                        Vous avez décidé {{ expurge }}<br>
+                    {% else %}
+                        Vous n'avez pas été détecté<br>
+                    {% endif %}
+
+                {% else %}
+                    Vous avez décidé de ne pas voler en première étape<br>
+                {% endif %}
+
+                {% if vol_2 %}
+                    Votre décision a été de voler en deuxième étape<br>
+
+                    {% if detect__2 %}
+                        Votre vol a été détecté<br>
+                    {% else %}
+                        Vous n'avez pas été détecté<br>
+                    {% endif %}
+
+                {% else %}
+                    Vous avez décidé de ne pas voler en deuxième étape<br>
+                {% endif %}
+
+            Votre payoff est {{ payoff_player }}<br>
+
+        {% elif voteur %}
+            Vous êtiez un voteur <br>
+            Votre choix était {{ vote }} <br>
+            Le résultat du vote est {{ resultat_vote }}<br>
+            Votre payoff est {{ payoff_player }}<br>
+        {% endif %}
+
+ {% next_button %}
+
+{% endblock %}

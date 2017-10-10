@@ -1,0 +1,38 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <table>
+            <td><span style="font-size:120%;">L'écran suivant contient 30 sliders comme celui-ci: </span></td>
+            <td><div id="test-value" style="width: 250px; margin: 20px"></div></td>
+        </table>
+        <div style="font-size:120%;">L'expérience consiste à positionner, 30 sliders de votre choix sur la valeur 50</div><br>
+        <div style="font-size:120%;">Pour pouvoir continuer l'expérience, vous devez placer 30 sliders sur la valeur 50</div><br>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block styles %}
+    <!-- define a style -->
+    <!-- or reference a static file -->
+    <link href="{% static "sliders/freshslider.min.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="{% static "sliders/freshslider.min.js" %}"></script>
+    <script>
+        $("#test-value").freshslider( { step: 1, value:70 , onchange:function(value){} } );
+    </script>
+
+{% endblock %}
+
+
